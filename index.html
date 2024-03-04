@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plasma Page</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background: url('https://timmhboy.github.io/v/Plasma-Background.gif') center center fixed; /* Set background to the provided GIF */
+            background-size: cover;
+            color: #fff; /* Set text color to white */
+            position: relative;
+            height: 100vh; /* Ensures the body fills the entire viewport */
+        }
+        #bigTitle {
+            text-align: center;
+            font-size: 3em;
+            padding: 50px;
+            background: rgba(0, 0, 0, 0.5); /* Add a semi-transparent black background for better visibility */
+        }
+        #fullscreenButton {
+            display: block;
+            margin: 20px auto;
+            padding: 10px;
+            font-size: 1.5em;
+        }
+        .button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px;
+            font-size: 1.5em;
+            cursor: pointer;
+            background: #fff; /* Set background color to white */
+            color: #000; /* Set text color to black */
+            border: none;
+            border-radius: 5px;
+            width: 50%; /* Set the width to 50% of the container */
+            box-sizing: border-box; /* Include padding and border in the width calculation */
+            text-align: center; /* Center the text within the button */
+        }
+        #changeBackgroundButton {
+            margin-bottom: 10px; /* Add margin between buttons */
+        }
+        #madeBy {
+            text-align: center;
+            font-size: 1em;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.5); /* Add a semi-transparent black background for better visibility */
+        }
+        #plasmaImage {
+            display: block;
+            margin: 20px auto;
+            max-width: 100%; /* Ensure the image doesn't exceed its natural size */
+        }
+
+        /* Style for the incognito icon button */
+        #openInIncognitoButton {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            z-index: 999; /* Ensure button stays above other content */
+        }
+
+        #openInIncognitoButton img {
+            width: 80px; /* Set width to 80px */
+            height: auto; /* Automatically adjust height to maintain aspect ratio */
+        }
+    </style>
+</head>
+<body>
+    <div id="bigTitle">Plasma</div>
+    <button id="fullscreenButton" class="button" onclick="loadNewWebsite()">Load Different Website</button>
+    <button id="changeBackgroundButton" class="button" onclick="changeBackground()">Change Background</button>
+    <button id="gamesButton" class="button" onclick="redirectToGames()">Games</button>
+    <div id="madeBy">Made By - <a href="https://sites.google.com/view/echosgames/" target="_blank">Echos Games</a></div>
+
+    <!-- Incognito icon button -->
+    <button id="openInIncognitoButton" onclick="openNewTab()">
+        <img src="https://4.bp.blogspot.com/-cfUTmzl4Xgc/Wy920gFNHTI/AAAAAAAAFMQ/juTGYUQS3_Qq6S1TJ9zc3q4q9SR_3W94ACLcBGAs/s1600/incognito-2231825_960_720.png" alt="Open in Incognito">
+    </button>
+
+    <script>
+        // Function to load background image from local storage
+        function loadBackground() {
+            var bg = localStorage.getItem('background');
+            if (bg) {
+                document.body.style.background = bg;
+            }
+        }
+
+        // Load background when the page loads
+        window.onload = loadBackground;
+
+        // Function to save background choice to local storage
+        function saveBackground(bgUrl) {
+            localStorage.setItem('background', bgUrl);
+            document.body.style.background = bgUrl;
+        }
+
+        // Function to change background
+        function changeBackground() {
+            var newBgUrl = prompt('Enter the URL of the new background image:');
+            if (newBgUrl) {
+                saveBackground('url(' + newBgUrl + ')');
+            }
+        }
+
+        // Function to open new tab with the specified URL
+        function openNewTab() {
+            var url = 'about:blank';
+            window.open(url, '_blank');
+        }
+
+        // Function to prompt user for a new website and load it
+        function loadNewWebsite() {
+            var url = prompt('What site do you want to replace this page with?');
+            var prefix = 'https://';
+            if (url && url.substr(0, prefix.length) !== prefix) {
+                url = prefix + url;
+            }
+
+            // Replace the current page with the new website
+            if (url) {
+                window.location.replace(url);
+            }
+        }
+
+        // Function to redirect users to the games website
+        function redirectToGames() {
+            var gamesUrl = 'https://greys2121.github.io/games/';
+            window.location.replace(gamesUrl);
+        }
+    </script>
+
+
+
+    <script>
+      var urlObj = new window.URL(window.location.href);
+      var url = "https://greys2121.github.io/testttt/";
+      var zoomFactor = 1.0; // Adjust the zoom factor as needed
+      var win;
+
+      function openNewTab() {
+          if (win) {
+              win.focus();
+          } else {
+              win = window.open('about:blank');
+              win.document.body.style.margin = '0';
+              win.document.body.style.height = '100vh';
+              var iframe = win.document.createElement('iframe');
+              iframe.style.transform = 'scale(' + zoomFactor + ')';
+              iframe.style.border = 'none';
+              iframe.style.width = '100%';
+              iframe.style.height = '100%';
+              iframe.style.margin = '0';
+              iframe.src = url;
+
+              iframe.onload = function () {
+                  var iframeDocument = win.document.querySelector('iframe').contentDocument;
+                  var script = iframeDocument.createElement('script');
+                  script.textContent = `
+                      document.body.style.overflow = "hidden";
+                      document.documentElement.style.overflow = 'hidden';
+                  `;
+                  iframeDocument.head.appendChild(script);
+              };
+
+              win.document.body.appendChild(iframe);
+          }
+      }
+  </script>
+  
+</body>
+</html>
