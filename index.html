@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>greyson plasma thingy!!!!!!!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="particles-js"></div>
+    <div class="backdrop"></div>
+    <div class="container">
+        <header>
+            <h1 id="bigTitle">Plasma</h1>
+        </header>
+        <nav>
+            <div class="button-group">
+                <button class="button" onclick="loadNewWebsite()">Load Website</button>
+                <button class="button" onclick="redirectToGames()">Games</button>
+                <button class="button" onclick="redirectToSavedWebsites()">Saved Websites</button>
+            </div>
+            <div class="button-group">
+                <button class="button" onclick="openRequestForm()">Request Things</button>
+                <button class="button" onclick="openBrowserMode()">Browser Mode</button>
+                <button class="button" onclick="toggleSettings()">Settings</button>
+            </div>
+        </nav>
+        <footer>
+            <p id="madeBy">Made By - <a href="https://sites.google.com/view/echosgames/" target="_blank">Echos Games</a></p>
+        </footer>
+    </div>
+
+    <button id="openInIncognitoButton" onclick="openNewTab()">
+        <img src="https://4.bp.blogspot.com/-cfUTmzl4Xgc/Wy920gFNHTI/AAAAAAAAFMQ/juTGYUQS3_Qq6S1TJ9zc3q4q9SR_3W94ACLcBGAs/s1600/incognito-2231825_960_720.png" alt="Open in Incognito">
+    </button>
+
+    <div id="settingsModal" class="modal">
+        <div class="modal-content">
+            <span id="closeSettings" onclick="toggleSettings()">&times;</span>
+            <h2>Settings</h2>
+            <div class="setting-group">
+                <label for="fontSelect">Select Font:</label>
+                <select id="fontSelect" onchange="changeFont()">
+                    <option value="Roboto">Roboto</option>
+                    <option value="Arial">Arial</option>
+                    <option value="Georgia">Georgia</option>
+                    <option value="Verdana">Verdana</option>
+                </select>
+            </div>
+            <div class="setting-group">
+                <label for="bgColor">Background Color:</label>
+                <input type="color" id="bgColor" onchange="changeBackgroundColor()" value="#1a1a1a">
+            </div>
+            <div class="setting-group">
+                <label for="bgImage">Background Image URL:</label>
+                <input type="text" id="bgImage" placeholder="Enter background image URL" onchange="changeBackgroundImage()">
+            </div>
+            <div class="setting-group">
+                <label for="particleToggle">Toggle Particles:</label>
+                <input type="checkbox" id="particleToggle" onchange="toggleParticles()" checked>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
