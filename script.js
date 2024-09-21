@@ -1,5 +1,6 @@
 // Initialize particles.js
 let particlesEnabled = true;
+
 function initParticles() {
     if (particlesEnabled) {
         particlesJS("particles-js", {
@@ -23,10 +24,43 @@ function initParticles() {
         });
     }
 }
-initParticles();
+
+// Load settings from local storage
+function loadSettings() {
+    const storedParticlesEnabled = localStorage.getItem('particlesEnabled');
+    particlesEnabled = storedParticlesEnabled === 'true';
+    const storedFont = localStorage.getItem('fontFamily');
+    const storedBgColor = localStorage.getItem('bgColor');
+    const storedBgImage = localStorage.getItem('bgImage');
+
+    if (storedFont) {
+        document.body.style.fontFamily = storedFont;
+        document.getElementById('fontSelect').value = storedFont;
+    }
+    if (storedBgColor) {
+        document.body.style.backgroundColor = storedBgColor;
+        document.getElementById('bgColor').value = storedBgColor;
+    }
+    if (storedBgImage) {
+        document.body.style.background = `url(${storedBgImage}) center center fixed`;
+        document.body.style.backgroundSize = 'cover';
+        document.getElementById('bgImage').value = storedBgImage;
+    }
+}
 
 // Load background when the page loads
-window.onload = loadBackground;
+window.onload = function() {
+    loadSettings();
+    initParticles();
+};
+
+// Save settings to local storage
+function saveSettings() {
+    localStorage.setItem('particlesEnabled', particlesEnabled);
+    localStorage.setItem('fontFamily', document.body.style.fontFamily);
+    localStorage.setItem('bgColor', document.body.style.backgroundColor);
+    localStorage.setItem('bgImage', document.body.style.background);
+}
 
 function toggleSettings() {
     const settingsModal = document.getElementById('settingsModal');
@@ -36,11 +70,13 @@ function toggleSettings() {
 function changeFont() {
     const fontSelect = document.getElementById('fontSelect');
     document.body.style.fontFamily = fontSelect.value;
+    saveSettings();
 }
 
 function changeBackgroundColor() {
     const bgColor = document.getElementById('bgColor').value;
     document.body.style.backgroundColor = bgColor;
+    saveSettings();
 }
 
 function changeBackgroundImage() {
@@ -48,6 +84,7 @@ function changeBackgroundImage() {
     if (bgImage) {
         document.body.style.background = `url(${bgImage}) center center fixed`;
         document.body.style.backgroundSize = 'cover';
+        saveSettings();
     }
 }
 
@@ -61,6 +98,7 @@ function toggleParticles() {
             canvas.remove();
         }
     }
+    saveSettings();
 }
 
 // Button functions
