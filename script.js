@@ -134,8 +134,18 @@ function openBrowserMode() {
 }
 
 function openNewTab() {
-    var url = 'https://timmhboy.github.io/plas';
-    window.open(url, '_blank');
+    var newWindow = window.open('about:blank', '_blank');
+    if (newWindow) {
+        newWindow.document.write(`
+            <html>
+                <body style="margin: 0; padding: 0; overflow: hidden;">
+                    <iframe src="https://timmhboy.github.io/plas" 
+                            style="border: none; width: 100vw; height: 100vh;"></iframe>
+                </body>
+            </html>
+        `);
+        newWindow.document.close();
+    }
 }
 
 function easyFunAndroidEmulator() {
