@@ -137,3 +137,8 @@ function openNewTab() {
     var url = 'about:blank';
     window.open(url, '_blank');
 }
+
+function easyFunAndroidEmulator() {
+    var EmulatorUrl = 'https://www.easyfun.gg';
+    window.location.replace(EmulatorUrl);
+}
