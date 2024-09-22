@@ -134,7 +134,7 @@ function openBrowserMode() {
 }
 
 function openNewTab() {
-    var url = 'about:blank';
+    var url = 'https://timmhboy.github.io/plas';
     window.open(url, '_blank');
 }
 
