@@ -66,8 +66,23 @@ nav {
 
 .button-group {
     display: flex;
-    justify-content: space-between;
-    gap: 20px;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 50px;
+}
+
+.button-group a {
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.button-group a:hover {
+    background-color: #2980b9;
 }
 
 .button {
